@@ -1,0 +1,45 @@
+server:
+  port: 6565
+spring:
+  application:
+    name: fetch-by-roomnumber-v2
+  profiles:
+    active:
+    - prod
+  
+
+
+---
+
+spring:    
+  datasource:
+    url: jdbc:sqlserver://meeting-room-server.database.windows.net:1433;database=MeetingRoomDB;user=meeting-room-server@meeting-room-server;password=Password#123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: meeting-room-server@meeting-room-server
+    password: Password#123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  config:
+    activate:
+      on-profile:
+      - azure
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+jwt-validate: http://localhost:3010/validateToken      
+---
+
+spring:    
+  datasource:
+    url: jdbc:sqlserver://meeting-room-server.database.windows.net:1433;database=MeetingRoomDB;user=meeting-room-server@meeting-room-server;password=Password#123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: meeting-room-server@meeting-room-server
+    password: Password#123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  config:
+    activate:
+      on-profile:
+      - prod
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+jwt-validate: http://20.124.34.119:3010/validateToken      
